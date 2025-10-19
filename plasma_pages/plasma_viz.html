@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plasma Cooling Viz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html,body,#root{height:100%;}
+    body{background:linear-gradient(135deg,#0f172a,#031130);}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function getTempColor(temp){
+      if(temp>75) return '#ef4444';
+      if(temp>60) return '#f59e0b';
+      if(temp>50) return '#eab308';
+      return '#10b981';
+    }
+
+    function PlasmaCoolingViz(){
+      const [isActive,setIsActive] = useState(false);
+      const [temperature,setTemperature] = useState(85);
+      const [plasmaIntensity,setPlasmaIntensity] = useState(0);
+      const [particles,setParticles] = useState([]);
+      const [heatWaves,setHeatWaves] = useState([]);
+
+      useEffect(()=>{
+        if(isActive){
+          const tempInterval = setInterval(()=>{ setTemperature(prev=>Math.max(45, prev-0.5)); },100);
+          const plasmaInterval = setInterval(()=>{ setPlasmaIntensity(prev=>Math.min(100, prev+5)); },50);
+          const particleInterval = setInterval(()=>{
+            const now = Date.now();
+            const newParticles = Array.from({length:3},(_,i)=>({ id: now + i, x: Math.random()*80+10, y:10, speed: Math.random()*2+2, type:'ionic' }));
+            setParticles(prev => [...prev, ...newParticles].slice(-30));
+          },200);
+          return ()=>{ clearInterval(tempInterval); clearInterval(plasmaInterval); clearInterval(particleInterval); };
+        } else {
+          setTemperature(85); setPlasmaIntensity(0); setParticles([]);
+        }
+      },[isActive]);
+
+      useEffect(()=>{
+        const heatInterval = setInterval(()=>{
+          if(temperature>60){
+            const now = Date.now();
+            const newHeat = Array.from({length:2},(_,i)=>({ id: now + i + 1000, x: Math.random()*60+20, y:75, speed: isActive?3:0.8, opacity: Math.random()*0.5+0.3, size: Math.random()*30+20 }));
+            setHeatWaves(prev => [...prev, ...newHeat].slice(-20));
+          } else {
+            setHeatWaves([]);
+          }
+        }, isActive?150:400);
+        return ()=>clearInterval(heatInterval);
+      },[temperature,isActive]);
+
+      useEffect(()=>{
+        const animationInterval = setInterval(()=>{
+          setParticles(prev => prev.map(p=>({...p, y: p.y + p.speed})).filter(p=>p.y<95));
+          setHeatWaves(prev => prev.map(h=>({...h, y: h.y - h.speed, opacity: h.opacity - 0.01})).filter(h=>h.y>5 && h.opacity>0));
+        },50);
+        return ()=>clearInterval(animationInterval);
+      },[]);
+
+      return (
+        <div className="min-h-screen p-6 text-white">
+          <div className="max-w-7xl mx-auto mb-6">
+            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+              <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">⚡ Electrohydrodynamic (EHD) Plasma Cooling System</h1>
+              <p className="text-sm text-slate-300">Watch ionic wind cool a processor zone without moving parts.</p>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">Pod Cross-Section View</h2>
+                  <button onClick={()=>setIsActive(!isActive)} className={`px-4 py-2 rounded-xl font-semibold ${isActive? 'bg-red-600':'bg-cyan-600'}`}>
+                    {isActive? '⏸ Stop Plasma':'▶ Start Plasma'}
+                  </button>
+                </div>
+
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl p-6 border-4 border-gray-700 h-[420px] overflow-hidden">
+                  <div className="absolute inset-0 opacity-30 transition-all duration-500" style={{ background: `linear-gradient(to bottom, ${getTempColor(temperature)}, #0b1220)` }} />
+
+                  <div className="absolute top-4 left-0 right-0 flex justify-around px-8">
+                    {[0,1,2,3,4,5,6,7].map((idx)=> (
+                      <div key={idx} className="relative">
+                        <div className={`w-3 h-8 rounded-full ${isActive? 'bg-yellow-400 shadow-lg':'bg-gray-600'}`} />
+                        {isActive && (
+                          <>
+                            <div className="absolute -top-2 -left-2 w-7 h-12 bg-cyan-400/30 rounded-full blur-md" />
+                            <div className="absolute -top-1 -left-1 w-5 h-10 bg-blue-400/40 rounded-full blur-sm" />
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {particles.map(p => (
+                    <div key={p.id} style={{ position:'absolute', left: `${p.x}%`, top: `${p.y}%`, width:6, height:6, borderRadius:999, background:'#34d399', boxShadow:'0 0 8px rgba(52,211,153,0.6)'}} />
+                  ))}
+
+                  {heatWaves.map(h => (
+                    <div key={h.id} style={{ position:'absolute', left: `${h.x}%`, top: `${h.y}%`, width: h.size, height: h.size, borderRadius:'50%', background:`radial-gradient(circle, rgba(239,68,68,${h.opacity}), rgba(251,146,60,${h.opacity*0.5}), transparent)`, filter:'blur(6px)', opacity: h.opacity }} />
+                  ))}
+
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-32 bg-gradient-to-t from-red-600 to-orange-500 rounded-lg border-2 border-red-400 flex items-center justify-center">
+                    <div className="text-white font-bold text-xl">PROCESSOR ZONE</div>
+                    {temperature>60 && (<div className="absolute inset-0 bg-red-500/20 rounded-lg animate-pulse" />)}
+                  </div>
+
+                  {isActive && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      {[0,1,2,3,4].map((idx)=> (
+                        <div key={idx} style={{ position:'absolute', left: `${20 + idx*15}%`, animationDelay:`${idx*0.15}s`}}>
+                          <div style={{ color:'#60a5fa', fontSize:28 }}>💨</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div style={{fontSize:20}}>🌡️</div>
+                  <h3 className="text-lg font-bold">Temperature</h3>
+                </div>
+                <div style={{ color: getTempColor(temperature)}} className="text-4xl font-bold mb-2">{temperature.toFixed(1)}°C</div>
+                <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
+                  <div style={{ width: `${((105-temperature)/60)*100}%`, background: `linear-gradient(to right, ${getTempColor(temperature)}, #10b981)`}} className="h-full rounded-full transition-all" />
+                </div>
+                <p className="text-slate-300 text-sm mt-2">Target: 45°C</p>
+              </div>
+
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div style={{fontSize:20}}>⚡</div>
+                  <h3 className="text-lg font-bold">Plasma Power</h3>
+                </div>
+                <div className="text-4xl font-bold text-cyan-400 mb-2">{plasmaIntensity}%</div>
+                <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
+                  <div style={{ width: `${plasmaIntensity}%`}} className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all rounded-full" />
+                </div>
+                <p className="text-slate-300 text-sm mt-2">{isActive? 'Active Cooling' : 'Standby'}</p>
+              </div>
+
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                <h3 className="text-lg font-bold mb-2">How It Works</h3>
+                <ol className="text-sm text-slate-300 space-y-2">
+                  <li><strong>1.</strong> Corona Discharge creates plasma at electrodes</li>
+                  <li><strong>2.</strong> Ion Generation: air molecules become charged</li>
+                  <li><strong>3.</strong> Ionic Wind: ions drag neutral air molecules</li>
+                  <li><strong>4.</strong> Convective Cooling removes heat from processor</li>
+                </ol>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="max-w-7xl mx-auto mt-6">
+            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold mb-3">The Science Behind EHD Cooling</h3>
+              <p className="text-slate-300">Electrohydrodynamic (EHD) cooling uses electric fields to ionize air and produce ionic wind. This creates airflow without fans or water and is ideal for silent, low-maintenance cooling.</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<PlasmaCoolingViz />);
+  </script>
+</body>
+</html>

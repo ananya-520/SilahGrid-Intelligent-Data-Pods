@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e285ec8defdec68e243e3775da3be667 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_e285ec8defdec68e243e3775da3be667" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e285ec8defdec68e243e3775da3be667 = L.map(
+                "map_e285ec8defdec68e243e3775da3be667",
+                {
+                    center: [25.095, 55.1595],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6dad0eae4f9a46f1097f9a2d1c18c43a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6dad0eae4f9a46f1097f9a2d1c18c43a.addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+            var circle_marker_05f1cd2cc152dea9a97a999849ae7445 = L.circleMarker(
+                [25.095, 55.1595],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_ef25665273bffe70a1913feb44f7a82a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ba9c4e421e773ed76aa303f5ffcfc253 = $(`<div id="html_ba9c4e421e773ed76aa303f5ffcfc253" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_1.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_ef25665273bffe70a1913feb44f7a82a.setContent(html_ba9c4e421e773ed76aa303f5ffcfc253);
+            
+        
+
+        circle_marker_05f1cd2cc152dea9a97a999849ae7445.bindPopup(popup_ef25665273bffe70a1913feb44f7a82a)
+        ;
+
+        
+    
+    
+            circle_marker_05f1cd2cc152dea9a97a999849ae7445.bindTooltip(
+                `<div>
+                     
+<b>Dubai Internet City (ID: 1)</b><br>
+CPU Load: 27.11%<br>
+Temperature: 31.64 °C<br>
+Battery: 81.11%<br>
+Solar Power: 376.98 W<br>
+Ozone Level: 0.045 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_928d490d5e6ced96923839a942f45a73 = L.circleMarker(
+                [25.1265, 55.3925],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_2a7b6835b4d58e229da9bfbc00701d87 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_da801098e02ae057a3869faaac9bed89 = $(`<div id="html_da801098e02ae057a3869faaac9bed89" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_2.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_2a7b6835b4d58e229da9bfbc00701d87.setContent(html_da801098e02ae057a3869faaac9bed89);
+            
+        
+
+        circle_marker_928d490d5e6ced96923839a942f45a73.bindPopup(popup_2a7b6835b4d58e229da9bfbc00701d87)
+        ;
+
+        
+    
+    
+            circle_marker_928d490d5e6ced96923839a942f45a73.bindTooltip(
+                `<div>
+                     
+<b>Dubai Silicon Oasis (ID: 2)</b><br>
+CPU Load: 13.44%<br>
+Temperature: 40.03 °C<br>
+Battery: 52.83%<br>
+Solar Power: 267.28 W<br>
+Ozone Level: 0.037 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_83f1d55fd346d87f62c8897b53b8d236 = L.circleMarker(
+                [25.08, 55.14],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_fc813538155a7187f30c7fe5510bc777 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff55ff7cfe245ee8ed380402bdee6452 = $(`<div id="html_ff55ff7cfe245ee8ed380402bdee6452" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_3.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_fc813538155a7187f30c7fe5510bc777.setContent(html_ff55ff7cfe245ee8ed380402bdee6452);
+            
+        
+
+        circle_marker_83f1d55fd346d87f62c8897b53b8d236.bindPopup(popup_fc813538155a7187f30c7fe5510bc777)
+        ;
+
+        
+    
+    
+            circle_marker_83f1d55fd346d87f62c8897b53b8d236.bindTooltip(
+                `<div>
+                     
+<b>Dubai Marina (ID: 3)</b><br>
+CPU Load: 19.39%<br>
+Temperature: 38.03 °C<br>
+Battery: 87.66%<br>
+Solar Power: 348.35 W<br>
+Ozone Level: 0.042 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20b32e8d09c305827f8da8609c922a3e = L.circleMarker(
+                [24.987, 55.061],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_ab6336259713b53622a4b9f13d94b022 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d5b06d1dc45383a7ffb2cdf11214708a = $(`<div id="html_d5b06d1dc45383a7ffb2cdf11214708a" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_4.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_ab6336259713b53622a4b9f13d94b022.setContent(html_d5b06d1dc45383a7ffb2cdf11214708a);
+            
+        
+
+        circle_marker_20b32e8d09c305827f8da8609c922a3e.bindPopup(popup_ab6336259713b53622a4b9f13d94b022)
+        ;
+
+        
+    
+    
+            circle_marker_20b32e8d09c305827f8da8609c922a3e.bindTooltip(
+                `<div>
+                     
+<b>Jebel Ali Industrial Area (ID: 4)</b><br>
+CPU Load: 28.66%<br>
+Temperature: 38.43 °C<br>
+Battery: 70.51%<br>
+Solar Power: 622.06 W<br>
+Ozone Level: 0.02 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f5365cef70ddd9ee6fa5d96870cd4cc6 = L.circleMarker(
+                [25.184, 55.264],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_74b12a0005d86f8557f44bdd9afaecbe = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_223c257cad94f8c340b1bf4e04fbad93 = $(`<div id="html_223c257cad94f8c340b1bf4e04fbad93" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_5.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_74b12a0005d86f8557f44bdd9afaecbe.setContent(html_223c257cad94f8c340b1bf4e04fbad93);
+            
+        
+
+        circle_marker_f5365cef70ddd9ee6fa5d96870cd4cc6.bindPopup(popup_74b12a0005d86f8557f44bdd9afaecbe)
+        ;
+
+        
+    
+    
+            circle_marker_f5365cef70ddd9ee6fa5d96870cd4cc6.bindTooltip(
+                `<div>
+                     
+<b>Business Bay (ID: 5)</b><br>
+CPU Load: 12.7%<br>
+Temperature: 32.52 °C<br>
+Battery: 91.35%<br>
+Solar Power: 104.79 W<br>
+Ozone Level: 0.027 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f95c2aefb6a1d711bbb178d55b92c42f = L.circleMarker(
+                [25.136, 55.22],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_77cc2845bcf094544649e4326e624a60 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_34d9724bf2a4bc786c880ca13726a356 = $(`<div id="html_34d9724bf2a4bc786c880ca13726a356" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_6.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_77cc2845bcf094544649e4326e624a60.setContent(html_34d9724bf2a4bc786c880ca13726a356);
+            
+        
+
+        circle_marker_f95c2aefb6a1d711bbb178d55b92c42f.bindPopup(popup_77cc2845bcf094544649e4326e624a60)
+        ;
+
+        
+    
+    
+            circle_marker_f95c2aefb6a1d711bbb178d55b92c42f.bindTooltip(
+                `<div>
+                     
+<b>Al Quoz (ID: 6)</b><br>
+CPU Load: 24.2%<br>
+Temperature: 46.37 °C<br>
+Battery: 48.27%<br>
+Solar Power: 733.17 W<br>
+Ozone Level: 0.015 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ffe3d0e1f915869f7aa508ccd389f6dd = L.circleMarker(
+                [25.102, 55.163],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_50a1fa7cf2a7684e00ca1a12d2523459 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3223ec315ffdc7ee224f31e2f3eec65f = $(`<div id="html_3223ec315ffdc7ee224f31e2f3eec65f" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_7.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_50a1fa7cf2a7684e00ca1a12d2523459.setContent(html_3223ec315ffdc7ee224f31e2f3eec65f);
+            
+        
+
+        circle_marker_ffe3d0e1f915869f7aa508ccd389f6dd.bindPopup(popup_50a1fa7cf2a7684e00ca1a12d2523459)
+        ;
+
+        
+    
+    
+            circle_marker_ffe3d0e1f915869f7aa508ccd389f6dd.bindTooltip(
+                `<div>
+                     
+<b>Dubai Knowledge Park (ID: 7)</b><br>
+CPU Load: 22.39%<br>
+Temperature: 35.7 °C<br>
+Battery: 83.63%<br>
+Solar Power: 230.25 W<br>
+Ozone Level: 0.037 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_76355f34bff5f94d5140ef1ac8313642 = L.circleMarker(
+                [25.219, 55.416],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_f9b7c4c6881f8425e5bc6d0c7863c0e8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fe9b0070b7fe674e7982372b0f40ea92 = $(`<div id="html_fe9b0070b7fe674e7982372b0f40ea92" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_8.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_f9b7c4c6881f8425e5bc6d0c7863c0e8.setContent(html_fe9b0070b7fe674e7982372b0f40ea92);
+            
+        
+
+        circle_marker_76355f34bff5f94d5140ef1ac8313642.bindPopup(popup_f9b7c4c6881f8425e5bc6d0c7863c0e8)
+        ;
+
+        
+    
+    
+            circle_marker_76355f34bff5f94d5140ef1ac8313642.bindTooltip(
+                `<div>
+                     
+<b>Mirdif (ID: 8)</b><br>
+CPU Load: 8.12%<br>
+Temperature: 39.33 °C<br>
+Battery: 58.81%<br>
+Solar Power: 110.5 W<br>
+Ozone Level: 0.039 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_76641659af911d68302a520d7f5752d6 = L.circleMarker(
+                [25.118, 55.404],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_19d3596148ef591dd8e174457f4204d3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6ea211b1fb5793dd0b9f289273b67bc3 = $(`<div id="html_6ea211b1fb5793dd0b9f289273b67bc3" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_9.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_19d3596148ef591dd8e174457f4204d3.setContent(html_6ea211b1fb5793dd0b9f289273b67bc3);
+            
+        
+
+        circle_marker_76641659af911d68302a520d7f5752d6.bindPopup(popup_19d3596148ef591dd8e174457f4204d3)
+        ;
+
+        
+    
+    
+            circle_marker_76641659af911d68302a520d7f5752d6.bindTooltip(
+                `<div>
+                     
+<b>Dubai Academic City (ID: 9)</b><br>
+CPU Load: 15.64%<br>
+Temperature: 32.75 °C<br>
+Battery: 91.16%<br>
+Solar Power: 658.02 W<br>
+Ozone Level: 0.023 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b00410a7da54e32e8ee8020128004162 = L.circleMarker(
+                [25.271, 55.308],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cyan", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e285ec8defdec68e243e3775da3be667);
+        
+    
+        var popup_d6380872642f1fbcb98b630da2add467 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ada2fc80b33624a6e801fbe8063da752 = $(`<div id="html_ada2fc80b33624a6e801fbe8063da752" style="width: 100.0%; height: 100.0%;"><a href="pod_pages/pod_10.html" target="_blank">Open 3D View</a></div>`)[0];
+                popup_d6380872642f1fbcb98b630da2add467.setContent(html_ada2fc80b33624a6e801fbe8063da752);
+            
+        
+
+        circle_marker_b00410a7da54e32e8ee8020128004162.bindPopup(popup_d6380872642f1fbcb98b630da2add467)
+        ;
+
+        
+    
+    
+            circle_marker_b00410a7da54e32e8ee8020128004162.bindTooltip(
+                `<div>
+                     
+<b>Deira (ID: 10)</b><br>
+CPU Load: 15.88%<br>
+Temperature: 38.53 °C<br>
+Battery: 62.38%<br>
+Solar Power: 524.49 W<br>
+Ozone Level: 0.034 ppm
+
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

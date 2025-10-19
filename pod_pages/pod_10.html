@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Deira 3D Visualization</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: radial-gradient(circle at 30% 50%, #0a0a0a 0%, #000 80%);
+    color: #fff;
+  }
+  #threejs-container {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    border-right: 2px solid #1e1e1e;
+  }
+  iframe {
+    border: none;
+    border-radius: 10px;
+    width: 95%;
+    height: 95%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+  }
+  #pod-info {
+    width: 35%;
+    padding: 30px;
+    background-color: #141414;
+    overflow-y: auto;
+  }
+  h2 {
+    font-size: 1.8em;
+    color: #4cc9f0;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .status {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    background: #1e1e1e;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+  }
+  li span {
+    color: #4cc9f0;
+    font-weight: bold;
+  }
+  .chart-container {
+    background: #1a1a1a;
+    padding: 15px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  }
+  canvas {
+    width: 100% !important;
+    height: 220px !important;
+  }
+</style>
+
+<script>
+let cpuChart, tempChart, batteryChart;
+const MAX_POINTS = 20;
+
+async function refreshData() {
+  try {
+    const response = await fetch("metrics.json?_=" + new Date().getTime());
+    if (!response.ok) return;
+    const data = await response.json();
+
+    // Update status text
+    document.getElementById("status").innerText = data["Status"];
+    document.getElementById("cpu").innerText = data["CPU Load (%)"] + "%";
+    document.getElementById("temp").innerText = data["Temperature (°C)"] + " °C";
+    document.getElementById("battery").innerText = data["Battery (%)"] + "%";
+    document.getElementById("solar").innerText = data["Solar Power (W)"] + " W";
+    document.getElementById("ozone").innerText = data["Ozone (ppm)"] + " ppm";
+
+    const timestamp = new Date().toLocaleTimeString();
+
+    // Update charts
+    addChartData(cpuChart, timestamp, data["CPU Load (%)"]);
+    addChartData(tempChart, timestamp, data["Temperature (°C)"]);
+    addChartData(batteryChart, timestamp, data["Battery (%)"]);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function addChartData(chart, label, value) {
+  chart.data.labels.push(label);
+  chart.data.datasets[0].data.push(value);
+  if (chart.data.labels.length > MAX_POINTS) {
+    chart.data.labels.shift();
+    chart.data.datasets[0].data.shift();
+  }
+  chart.update();
+}
+
+function initCharts() {
+  const ctxCpu = document.getElementById('cpuChart').getContext('2d');
+  const ctxTemp = document.getElementById('tempChart').getContext('2d');
+  const ctxBattery = document.getElementById('batteryChart').getContext('2d');
+
+  cpuChart = new Chart(ctxCpu, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'CPU Load (%)',
+        borderColor: '#ffb347',
+        data: [],
+        fill: false,
+        tension: 0.3
+      }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+  });
+
+  tempChart = new Chart(ctxTemp, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Temperature (°C)',
+        borderColor: '#ff5c8a',
+        data: [],
+        fill: false,
+        tension: 0.3
+      }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 60 } } }
+  });
+
+  batteryChart = new Chart(ctxBattery, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Battery (%)',
+        borderColor: '#00ff99',
+        data: [],
+        fill: false,
+        tension: 0.3
+      }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+  });
+}
+
+window.onload = () => {
+  initCharts();
+  refreshData();
+  setInterval(refreshData, 3000);
+};
+</script>
+
+</head>
+<body>
+  <div id="threejs-container">
+    <iframe src="https://skybox.blockadelabs.com/e/a65de74e75260778cb509f6b4fe227f9" allow="fullscreen"></iframe>
+  </div>
+
+  <div id="pod-info">
+    <h2>Deira (ID: 10)</h2>
+    <div id="status" class="status">Idle</div>
+    <ul>
+      <li><strong>CPU Load:</strong> <span id="cpu">15.88%</span></li>
+      <li><strong>Temperature:</strong> <span id="temp">38.53 °C</span></li>
+      <li><strong>Battery:</strong> <span id="battery">62.38%</span></li>
+      <li><strong>Solar Power:</strong> <span id="solar">524.49 W</span></li>
+      <li><strong>Ozone Level:</strong> <span id="ozone">0.034 ppm</span></li>
+    </ul>
+
+    <div class="chart-container">
+      <canvas id="cpuChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="tempChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="batteryChart"></canvas>
+    </div>
+  </div>
+</body>
+</html>
