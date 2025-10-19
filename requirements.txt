@@ -5,3 +5,6 @@ plotly
 folium
 simpy
 matplotlib
+scikit-learn
+joblib
+scipy
